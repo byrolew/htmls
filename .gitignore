@@ -1,0 +1,42 @@
+# IDE files
+.idea/
+
+# Python template
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff
+*.log
+
+# py.test files
+.cache/
+
+# virtualenv
+.env
+.venv/
+venv/
+ENV/
+
+# Vagrant
+.vagrant
+
+# Project specific file
+/data/*
+!/data/.keep
+/dependencies/*
+!/dependencies/.keep
+
+# Other
+.DS_Store
+
