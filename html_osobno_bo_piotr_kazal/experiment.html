@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="login.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<script>
+  $(document).on('keypress', function(e) {
+    // var tag = e.target.tagName.toLowerCase();
+    if ( e.which >= 48 && e.which <= 57) {
+      // alert(e.which)
+      $(".on, .off").toggleClass('off on');
+      // alert(event.timeStamp);
+      // $("#1, #3").toggleClass('off on');
+    }
+  });
+</script>
+
+<div class = "container">
+  <div class="wrapper">
+  <div class="off" id="1">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>
+  <div class="on" id="2">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>  
+  <div class="off" id="3">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>  
+  <div class="on" id="4">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>  
+  <div class="off" id="5">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>  
+  <div class="off" id="6">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>  
+  <div class="on" id="7">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>  
+  <div class="off" id="8">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>  
+  <div class="on" id="9">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>  
+  <div class="on" id="0">
+    <img src="../on.png" class="turned_on rounded float-left">
+    <img src="../off.png" class="turned_off rounded float-left">
+  </div>    
+  </div>
+</div>
+</body>
+</html>
