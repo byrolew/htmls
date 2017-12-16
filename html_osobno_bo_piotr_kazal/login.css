@@ -62,3 +62,9 @@ input[type="text"] {
 .off img.turned_on {
   display: none;
 }
+
+.bulb-names {
+  display: inline-block;
+  margin-right: 3.57%;
+  margin-left: 3.57%;
+}

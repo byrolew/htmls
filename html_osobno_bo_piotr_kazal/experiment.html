@@ -9,20 +9,9 @@
   <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script>
 </head>
 <body>
-
-<script>
-  $(document).on('keypress', function(e) {
-    // var tag = e.target.tagName.toLowerCase();
-    if ( e.which >= 48 && e.which <= 57) {
-      // alert(e.which)
-      $(".on, .off").toggleClass('off on');
-      // alert(event.timeStamp);
-      // $("#1, #3").toggleClass('off on');
-    }
-  });
-</script>
 
 <div class = "container">
   <div class="wrapper">
@@ -30,7 +19,7 @@
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
   </div>
-  <div class="on" id="2">
+  <div class="off" id="2">
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
   </div>  
@@ -38,7 +27,7 @@
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
   </div>  
-  <div class="on" id="4">
+  <div class="off" id="4">
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
   </div>  
@@ -50,7 +39,7 @@
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
   </div>  
-  <div class="on" id="7">
+  <div class="off" id="7">
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
   </div>  
@@ -58,15 +47,107 @@
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
   </div>  
-  <div class="on" id="9">
+  <div class="off" id="9">
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
   </div>  
-  <div class="on" id="0">
+  <div class="off" id="0">
     <img src="../on.png" class="turned_on rounded float-left">
     <img src="../off.png" class="turned_off rounded float-left">
-  </div>    
+  </div>
+  <h1 class="bulb-names">1</h1>
+  <h1 class="bulb-names">2</h1>
+  <h1 class="bulb-names">3</h1>
+  <h1 class="bulb-names">4</h1>
+  <h1 class="bulb-names">5</h1>
+  <h1 class="bulb-names">6</h1>
+  <h1 class="bulb-names">7</h1>
+  <h1 class="bulb-names">8</h1>
+  <h1 class="bulb-names">9</h1>
+  <h1 class="bulb-names">0</h1>
   </div>
 </div>
 </body>
+
+<script>
+  events = {};
+  seq = ['on', 'on', 'on', 'off', 'on', 'on', 'off', 'off', 'off', 'on'];
+  all_buttons = true;
+  lighting_time = 1000;
+  feedback = false;
+  interval_time = 3000;
+  keys = [];
+  keys_to_press = [];
+
+  function init(seq, all_buttons, lighting_time, interval_time) {
+    seq_to_keys(seq);
+    keys_to_press = keys.slice();
+    for(i = 0; i < seq.length; i++) {
+      if(seq[i] === 'on'){
+        $('#' + i).toggleClass('off on');
+      }
+    }
+    if (!all_buttons) {
+      setTimeout(function(){
+        $('.on').toggleClass('off on');
+        setTimeout(function(){
+          location.reload();
+        }, interval_time);
+      }, lighting_time);
+    }
+
+  }
+
+  function seq_to_keys(seq) {
+    for(i = 0; i < seq.length; i++) {
+      if(seq[i] === 'on'){
+        keys.push(i + 48);  
+      }
+    }
+  }
+
+  function change_light(key, feedback, all_buttons, lighting_time, interval_time) {
+    if($.inArray(key, keys) === -1){
+      in_arr = false;
+    } else {
+      in_arr = true;
+    }
+    if (!in_arr){
+      if(feedback) {
+        $.playSound("../sound.mp3");
+      }  
+    }
+    if (all_buttons){
+      if (is_that_all(key)){
+        setTimeout(function(){
+          $(".on").toggleClass('off on');
+          setTimeout(function(){
+            location.reload();
+          }, interval_time);
+        }, lighting_time);
+      }
+    }
+  }
+
+  function is_that_all(key) {
+    if ($.inArray(key, keys_to_press) !== -1){
+      keys_to_press.splice( $.inArray(key, keys_to_press), 1);
+    }
+    if (keys_to_press.length === 0){
+      return true;
+    }
+    return false;
+  }
+
+  init(seq, all_buttons, lighting_time, interval_time)
+
+  $(document).on('keypress', function(e) {
+    if ( e.which >= 48 && e.which <= 57) {
+      if (!(e.which in events)) {
+        events[e.which] = event.timeStamp;
+      }
+      change_light(e.which, feedback, all_buttons, lighting_time, interval_time)
+    }
+  });
+</script>
 </html>
