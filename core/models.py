@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Experiment(models.Model):
     username = models.CharField(max_length=256, blank=True, null=True)
     feedback = models.BooleanField()
@@ -8,5 +9,29 @@ class Experiment(models.Model):
     interval_time = models.IntegerField(default=0)
     session_time = models.IntegerField(default=0)
 
-class Event(models.Model):
+    def __str__(self):
+        return self.username
+
+
+class Sequence(models.Model):
     experiment = models.ForeignKey('Experiment', on_delete=True)
+    seq_id = models.IntegerField()
+    done = models.BooleanField(default=0)
+
+    def __str__(self):
+        return self.experiment.username + ' ' + str(self.seq_id)
+
+
+class Session(models.Model):
+    experiment = models.ForeignKey('Experiment', on_delete=True)
+    time_spent = models.IntegerField(default=0)
+
+
+class Event(models.Model):
+    session = models.ForeignKey('Session', on_delete=True)
+    sequence = models.ForeignKey('Sequence', on_delete=True)
+    timestamp = models.FloatField()
+    event_type = models.CharField(max_length=16)
+
+    def __str__(self):
+        return 'ET: {}, SEQ_ID: {}'.format(self.event_type , self.sequence.seq_id)

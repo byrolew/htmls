@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^form2/$', views.form2, name="form2"),
     url(r'^desc/$', views.desc, name="desc"),
     url(r'^end_trial/$', views.end_trial, name="end_trial"),
-    url(r'^experiment/$', views.experiment, name="experiment"),
+    url(r'^experiment/$', views.experiment_page, name="experiment_page"),
 ]
