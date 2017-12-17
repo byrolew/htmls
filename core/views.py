@@ -42,6 +42,10 @@ def form1(request):
 def form2(request):
     if request.method == 'POST':
         # create experiment
+        experiment = Experiment.objects.get(username=username)
+        if experiment:
+            raise ValueError('There is such experiment! Use different name.')
+
         experiment = Experiment.objects.latest('pk')
         experiment.lighting_time = int(request.POST.get('lighting_time'))
         experiment.interval_time = int(request.POST.get('interval_time'))
