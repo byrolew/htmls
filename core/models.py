@@ -8,6 +8,7 @@ class Experiment(models.Model):
     lighting_time = models.IntegerField(default=0)
     interval_time = models.IntegerField(default=0)
     session_time = models.IntegerField(default=0)
+    is_trial = models.BooleanField()
 
     def __str__(self):
         return self.username
@@ -16,7 +17,8 @@ class Experiment(models.Model):
 class Sequence(models.Model):
     experiment = models.ForeignKey('Experiment', on_delete=True)
     seq_id = models.IntegerField()
-    done = models.BooleanField(default=0)
+    is_done = models.BooleanField(default=0)
+    trial = models.BooleanField()
 
     def __str__(self):
         return self.experiment.username + ' ' + str(self.seq_id)
@@ -25,6 +27,8 @@ class Sequence(models.Model):
 class Session(models.Model):
     experiment = models.ForeignKey('Experiment', on_delete=True)
     time_spent = models.IntegerField(default=0)
+    first_ts = models.FloatField(default=0)
+    last_ts = models.FloatField(default=0)
 
 
 class Event(models.Model):

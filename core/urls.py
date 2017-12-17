@@ -8,4 +8,7 @@ urlpatterns = [
     url(r'^desc/$', views.desc, name="desc"),
     url(r'^end_trial/$', views.end_trial, name="end_trial"),
     url(r'^experiment/$', views.experiment_page, name="experiment_page"),
+    url(r'^end_of_session/$', views.end_of_session, name="end_of_session"),
+    url(r'^end/$', views.end, name="end"),
+    url(r'^reset/$', views.reset, name="reset"),
 ]

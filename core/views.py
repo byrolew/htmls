@@ -1,6 +1,6 @@
 import random
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .models import (
     Experiment, 
@@ -17,6 +17,7 @@ def login_page(request):
         if username == 'admin':
             return redirect('form1')
         else:
+            experiment = get_object_or_404(Experiment, username=username)
             return redirect('desc')
     else:
         return render(request, 'core/login.html', {})
@@ -29,6 +30,7 @@ def form1(request):
         experiment = Experiment.objects.create(
             feedback=feedback,
             all_buttons=all_buttons,
+            is_trial=True,
         )
         experiment.save()
 
@@ -56,8 +58,20 @@ def form2(request):
                 Sequence(
                     experiment=experiment,
                     seq_id=seq_id,
+                    trial=False,
                 ),
             )
+
+        n_trials = 5
+        for seq_id in random.sample(seq_ids, n_trials):
+            seq.append(
+                Sequence(
+                    experiment=experiment,
+                    seq_id=seq_id,
+                    trial=True,
+                ),
+            )
+
         Sequence.objects.bulk_create(seq)
 
         # create session
@@ -70,7 +84,8 @@ def form2(request):
         return render(request, 'core/form2.html', {})
 
 def desc(request):
-    return render(request, 'core/desc.html', {})
+    experiment = Experiment.objects.latest('pk')
+    return render(request, 'core/desc.html', {'exp': experiment})
 
 def end_trial(request):
     return render(request, 'core/end_trial.html', {})
@@ -78,13 +93,13 @@ def end_trial(request):
 def experiment_page(request):
     session = Session.objects.latest('pk')
     experiment = Experiment.objects.latest('pk')
-    sequence = Sequence.objects.filter(experiment=experiment, done=False)[0]
 
     if request.method == 'POST':
         # update sequence
+
         prev_seq_pk = request.POST.get('prev_seq_pk')
         prev_seq = Sequence.objects.get(pk=prev_seq_pk)
-        prev_seq.done = True
+        prev_seq.is_done = True
         prev_seq.save()
 
         # update events
@@ -101,13 +116,28 @@ def experiment_page(request):
             new_event.save()
 
         # update session
+        all_ts = [ts for name, ts in request.POST.items() if name.startswith('event_')]
         time_spent = float(request.POST.get('time_spent'))
         session.time_spent += time_spent
+        session.last_ts = max(all_ts)
+        if session.first_ts == 0:
+            session.first_ts = min(all_ts)
         session.save()
 
         if session.time_spent > experiment.session_time:
             session = Session.objects.create(experiment=experiment)
-            return redirect('desc')
+            return redirect('end_of_session')
+
+    try:
+        sequence = Sequence.objects.filter(experiment=experiment, is_done=False).order_by('-trial')[0]
+    except IndexError:
+        return redirect('end')
+
+    trials_left = len(Sequence.objects.filter(trial=True, is_done=False))
+    if trials_left == 0 and experiment.is_trial:
+        experiment.is_trial = False
+        experiment.save()
+        return redirect('end_trial')
 
     seq_id_bin = '{0:b}'.format(sequence.seq_id)
     seq_id_bin = '0'*(10-len(seq_id_bin))+seq_id_bin
@@ -123,8 +153,14 @@ def experiment_page(request):
         },
     )
 
+def end_of_session(request):
+    return render(request, 'core/end_of_session.html', {})
 
+def end(request):
+    return render(request, 'core/end.html', {})
 
+def reset(request):
+    Experiment.objects.all().delete()
 
 
 

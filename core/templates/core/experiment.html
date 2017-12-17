@@ -12,56 +12,71 @@
 {% block content %}
 <div class = "container">
   <div class="wrapper">
-  <div class="off" id="1">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>
-  <div class="off" id="2">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>  
-  <div class="off" id="3">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>  
-  <div class="off" id="4">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>  
-  <div class="off" id="5">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>  
-  <div class="off" id="6">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>  
-  <div class="off" id="7">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>  
-  <div class="off" id="8">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>  
-  <div class="off" id="9">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>  
-  <div class="off" id="0">
-    <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
-    <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
-  </div>
-  <h1 class="bulb-names">1</h1>
-  <h1 class="bulb-names">2</h1>
-  <h1 class="bulb-names">3</h1>
-  <h1 class="bulb-names">4</h1>
-  <h1 class="bulb-names">5</h1>
-  <h1 class="bulb-names">6</h1>
-  <h1 class="bulb-names">7</h1>
-  <h1 class="bulb-names">8</h1>
-  <h1 class="bulb-names">9</h1>
-  <h1 class="bulb-names">0</h1>
+    <table>
+    <tr>
+      <th class="lamp off" id="1">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>
+      <th class="lamp off" id="2">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>  
+      <th class="lamp off" id="3">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>  
+      <th class="lamp off" id="4">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>  
+      <th class="lamp off" id="5">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>  
+      <th class="lamp off" id="6">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>  
+      <th class="lamp off" id="7">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>  
+      <th class="lamp off" id="8">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>  
+      <th class="lamp off" id="9">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>  
+      <th class="lamp off" id="0">
+        <img src="{% static 'on.png' %}" class="turned_on rounded float-left">
+        <img src="{% static 'off.png' %}" class="turned_off rounded float-left">
+      </th>
+    </tr>
+    <tr>
+      <th class="bulb-names text-center"><h1>1</h1></th>
+      <th class="bulb-names text-center"><h1>2</h1></th>
+      <th class="bulb-names text-center"><h1>3</h1></th>
+      <th class="bulb-names text-center"><h1>4</h1></th>
+      <th class="bulb-names text-center"><h1>5</h1></th>
+      <th class="bulb-names text-center"><h1>6</h1></th>
+      <th class="bulb-names text-center"><h1>7</h1></th>
+      <th class="bulb-names text-center"><h1>8</h1></th>
+      <th class="bulb-names text-center"><h1>9</h1></th>
+      <th class="bulb-names text-center"><h1>0</h1></th>
+    </tr>
+    </table>
+
+    <div class="form-signin pause">
+      <h2 class="not-used text-center">
+        Eksperyment został wstrzymany, wciśnij ESC aby kontynuować.
+      </h2>
+      <h2 class="used text-center">
+        Eksperyment {% if exp.is_trial %}próbny{% endif %} w toku, wciśnij ESC aby go zatrzymać.
+      </h2>
+    </div>
   </div>
 </div>
 {% endblock %}
@@ -76,6 +91,9 @@
   interval_time = {{ exp.interval_time }};
   keys = [];
   keys_to_press = [];
+  paused = false;
+  paused_timestamp = 0;
+  paused_time_spent = 0;
 
   function post(path, params, method) {
       method = method || "post"; // Set method to post by default if not specified.
@@ -108,7 +126,7 @@
         setTimeout(function(){
           data = events
           data['prev_seq_pk'] = '{{ seq_pk }}';
-          data['time_spent'] = +new Date() - events['event_start']; //TODO: pause time
+          data['time_spent'] = +new Date() - events['event_start'] - paused_time_spent; 
           post("{% url 'experiment_page' %}", data);
         }, interval_time);
       }, lighting_time);
@@ -143,12 +161,12 @@
     } else {
       in_arr = true;
     }
-    if (!in_arr){
+    if(!in_arr){
       if(feedback) {
         $.playSound("{% static 'sound.mp3' %}");
       }  
     }
-    if (all_buttons){
+    if(all_buttons){
       if (is_that_all(key)){
         next_sequence();
       }
@@ -156,10 +174,10 @@
   }
 
   function is_that_all(key) {
-    if ($.inArray(key, keys_to_press) !== -1){
+    if($.inArray(key, keys_to_press) !== -1){
       keys_to_press.splice( $.inArray(key, keys_to_press), 1);
     }
-    if (keys_to_press.length === 0){
+    if(keys_to_press.length === 0){
       return true;
     }
     return false;
@@ -168,12 +186,24 @@
   init(seq, all_buttons, lighting_time, interval_time)
 
   $(document).on('keypress', function(e) {
-    if ( e.which >= 48 && e.which <= 57) {
-      if (!(e.which in events)) {
+    if(e.which >= 48 && e.which <= 57 && !paused) {
+      if(!(e.which in events)) {
         events['event_'+e.which] = +new Date();
       }
       change_light(e.which, feedback, all_buttons, lighting_time, interval_time)
     }
+
+    if(e.which === 0){
+      $('.pause h2').toggleClass('not-used used');
+      if(paused){
+        paused = false;
+        paused_time_spent += +new Date() - paused_timestamp;
+      } else {
+        paused = true;
+        paused_timestamp = +new Date();
+      }
+    }
+
   });
 </script>
 {% endblock %}
