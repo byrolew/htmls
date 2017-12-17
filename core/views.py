@@ -42,8 +42,8 @@ def form1(request):
 def form2(request):
     if request.method == 'POST':
         # create experiment
-        experiment = Experiment.objects.get(username=username)
-        if experiment:
+        experiment = Experiment.objects.filter(username=request.POST.get('username'))
+        if len(experiment) > 0:
             raise ValueError('There is such experiment! Use different name.')
 
         experiment = Experiment.objects.latest('pk')
