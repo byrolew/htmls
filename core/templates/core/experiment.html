@@ -71,10 +71,10 @@
 
     <div class="form-signin pause">
       <h2 class="not-used text-center">
-        Eksperyment został wstrzymany, wciśnij ESC aby kontynuować.
+        Eksperyment został wstrzymany, wciśnij SPACE aby kontynuować.
       </h2>
       <h2 class="used text-center">
-        Eksperyment {% if exp.is_trial %}próbny{% endif %} w toku, wciśnij ESC aby go zatrzymać.
+        Eksperyment {% if exp.is_trial %}próbny{% endif %} w toku, wciśnij SPACE aby go zatrzymać.
       </h2>
     </div>
   </div>
@@ -193,7 +193,7 @@
       change_light(e.which, feedback, all_buttons, lighting_time, interval_time)
     }
 
-    if(e.which === 0){
+    if(e.which === 32){
       $('.pause h2').toggleClass('not-used used');
       if(paused){
         paused = false;

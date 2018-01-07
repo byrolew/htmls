@@ -1,6 +1,7 @@
 import random
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
 
 from .models import (
     Experiment, 
@@ -15,7 +16,7 @@ def login_page(request):
         username = request.POST.get('username')
         
         if username == 'admin':
-            return redirect('form1')
+            return redirect('panel_admin')
         else:
             experiment = get_object_or_404(Experiment, username=username)
             return redirect('desc')
@@ -166,11 +167,24 @@ def end(request):
 def reset(request):
     Experiment.objects.all().delete()
 
+def report(request):
+    exp = Experiment.objects.latest('pk')
+    events = Event.objects.filter(session__experiment=exp)
+    results = ['event_type,timestamp,username,time_spent,first_ts,last_ts,seq_id,trial']
+    for e in events:
+        results.append(','.join(map(str, [
+            e.event_type,
+            e.timestamp,
+            e.session.experiment.username,
+            e.session.time_spent,
+            e.session.first_ts,
+            e.session.last_ts,
+            e.sequence.seq_id,
+            e.sequence.trial,
+        ])))
 
+    return HttpResponse('\n'.join(results))
 
-
-
-
-
-
+def panel_admin(request):
+    return render(request, 'core/panel_admin.html', {})
 

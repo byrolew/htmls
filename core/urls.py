@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^end_of_session/$', views.end_of_session, name="end_of_session"),
     url(r'^end/$', views.end, name="end"),
     url(r'^reset/$', views.reset, name="reset"),
+    url(r'^report.csv$', views.report, name="report"),
+    url(r'^panel_admin$', views.panel_admin, name="panel_admin"),
 ]
